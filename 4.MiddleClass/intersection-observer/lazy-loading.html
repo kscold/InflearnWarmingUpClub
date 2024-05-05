@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 400px;
+        height: 300px;
+        object-fit: block;
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      src="https://via.placeholder.com/400x300"
+      data-src="https://ik.imagekit.io/demo/img/image4.jpeg?tr=w-400,h-300"
+    />
+    <img
+      src="https://via.placeholder.com/400x300"
+      data-src="https://ik.imagekit.io/demo/img/image4.jpeg?tr=w-400,h-300"
+    />
+    <img
+      src="https://via.placeholder.com/400x300"
+      data-src="https://ik.imagekit.io/demo/img/image4.jpeg?tr=w-400,h-300"
+    />
+    <img
+      src="https://via.placeholder.com/400x300"
+      data-src="https://ik.imagekit.io/demo/img/image4.jpeg?tr=w-400,h-300"
+    />
+    <script>
+      const observer = new IntersectionObserver(
+        function (entries, observer) {
+          console.log(entries);
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.src = entry.target.dataset.src; // data-src를 불러옴
+
+              observer.unobserve(entry.target); // data-src를 불러왔으면 관찰 해제
+            }
+          });
+        },
+        { threshold: 1 }
+      );
+
+      const imgs = document.querySelectorAll('img');
+      imgs.forEach((img) => {
+        observer.observe(img);
+      });
+    </script>
+  </body>
+</html>
